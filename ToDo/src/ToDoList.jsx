@@ -9,10 +9,32 @@ function Todo(){
     function handlechange(e){
         setnewtask(e.target.value);
     }
-    function addtask(){}
-    function deletetask(index){}
-    function movetaskup(index){}
-    function movetaskdown(index){}
+    function addtask(){
+        if(newtask === '') return;
+        settask(t => [...task , newtask])
+        setnewtask('');
+    }
+    function deletetask(index){
+        const updatedtask = task.filter((_,i) => i !== index);
+        settask(updatedtask);
+    }
+    function movetaskup(index){
+        if(index > 0 ){
+            const updatedtask = [...task];
+            [updatedtask[index] , updatedtask[index-1]] =
+             [updatedtask[index-1] , updatedtask[index]];
+             settask(updatedtask);
+        }
+    }
+    function movetaskdown(index){
+        if(index < task.length - 1){
+            const updatedtask = [...task];
+            [updatedtask[index] , updatedtask[index+1]] =
+             [updatedtask[index+1] , updatedtask[index]];
+             settask(updatedtask);
+        }
+
+    }
 
     return(
         <>
